@@ -1,38 +1,22 @@
 <template>
-  <q-page class="flex flex-center">
-    <!-- card 1 -->
-    <q-card style="min-width:300px;" class="my-card">
-      <q-card-section>
-        <div class="text-overline">Armazenamento</div>
-        <div class="text-h6">Armazenar</div>
-        <q-card-actions>
-          <q-btn color="primary" outline>Acessar</q-btn>
-        </q-card-actions>
-       </q-card-section>
-    </q-card>
-    <!-- card 1 -->
-    <!-- card 2 -->
-    <q-card style="width 100%; min-width:300px;" class="my-card">
-      <q-card-section>
-        <div class="text-overline">Armazenamento</div>
-        <div class="text-h6">Armazenar</div>
-        <q-card-actions>
-          <q-btn color="primary" outline>Acessar</q-btn>
-        </q-card-actions>
-      </q-card-section>
-    </q-card>
-    <!-- card 2 -->
-    <!-- card 3 -->
-    <q-card style="min-width:300px;" class="my-card">
-      <q-card-section>
-        <div class="text-overline">Armazenamento</div>
-        <div class="text-h6">Armazenar</div>
-        <q-card-actions>
-          <q-btn color="primary" outline>Acessar</q-btn>
-        </q-card-actions>
-      </q-card-section>
-    </q-card>
-    <!-- card 2 -->
+  <q-page padding>
+    <div class="row q-mb-lg">
+      <q-input class="col" placeholder="Add new task"></q-input>
+      <q-btn 
+        color=primary
+        size=sm
+        label=add
+      ></q-btn>
+    </div>
+    <div class="row">
+      <q-list class="col" bordered separator>
+       <q-item v-for= "task in tasks" :key = "task" label="task">
+        <q-item-section avatar>
+          <q-icon color="green" name="check" />
+        </q-item-section>
+      </q-item>  
+    </q-list>
+    </div>
   </q-page>
 </template>
 
@@ -40,6 +24,12 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'PageIndex'
+  name: 'PageIndex',
+  data(){
+    return {
+      tasks:['wake up','Brush teeth','shower','shower']
+    }
+    
+  }
 })
 </script>
