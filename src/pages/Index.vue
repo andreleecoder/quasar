@@ -17,22 +17,22 @@
           {{task}}  
           </q-item-section>  
         <q-item-section avatar>
-          <q-icon color="green" name="check" />
+          <q-icon @click="moveToDone(index)" color="green" name="check"/>
         </q-item-section>   
      </q-item>  
     </q-list>
     </div>
-    
+
      <div class="row">
       <q-list class="col" bordered separator>
         <q-list-header>Done</q-list-header>
-       <q-item v-for= "(task, index) in tasks" v-bind:key = "index" > 
+       <q-item v-for= "(task, index) in done" v-bind:key = "index" > 
           <q-item-section>
           {{task}}  
-          </q-item-section>  
-        <q-item-section avatar>
-          <q-icon color="green" name="check" />
-        </q-item-section>   
+          </q-item-section> 
+          <q-item-section avatar>
+          <q-icon @click="deleteTask(index)" color="red" name="close" />
+        </q-item-section>     
      </q-item>  
     </q-list>
     
@@ -49,6 +49,7 @@ export default defineComponent({
  data(){
     return {
       tasks:[],
+      done:[],
       newTask:''    
     }
     
@@ -57,7 +58,24 @@ export default defineComponent({
   addTask(){
     this.tasks.push(this.newTask)
     this.newTask=''
-  }
+  },
+  moveToDone(index){
+    this.done.push(this.tasks[index])
+    this.tasks.splice(index, 1)
+  },
+   deleteTask(index){
+     this.$q.dialog({
+       title:'confirm',
+       message:'Really want to delete?',
+       ok:'Yes',
+       cancel:'No'
+     }).then(() => {
+       this.done.splice(index, 1)
+       this.$q.notify('Deleted')
+     }).catch(() => {
+     
+     })
+   }
   }
   })
   
